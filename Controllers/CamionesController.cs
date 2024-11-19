@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Transportes_MVC_gen_12.Models;
+using static Transportes_MVC_gen_12.Models.Enum;
 
 namespace Transportes_MVC_gen_12.Controllers
 {
@@ -307,6 +308,50 @@ namespace Transportes_MVC_gen_12.Controllers
             }
         }
 
+        //GET: Eliminar Camión
+        public ActionResult Eliminar_Camion(int id)
+        {
+            try
+            {
+                using (TransportesEntities context = new TransportesEntities())
+                {
+                    //voy a recupoerar el camión que deseo eliminar
+                    Camiones _camion = context.Camiones.Where(x => x.ID_Camion == id).FirstOrDefault();
+
+                    //validar si realmente traje un camión
+                    if (_camion != null)
+                    {
+                        //puedo eliminar
+                        context.Camiones.Remove(_camion);
+                        context.SaveChanges();
+                        //sweet alert
+                        SweetAlert("Eliminado", "Camión eliminado con éxito", NotificationType.success);
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        //Sweet Alert
+                        SweetAlert("No encontrado", $"No hemos encontrado el camión con identificador {id}", NotificationType.info);
+                        return RedirectToAction("Index");
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                //Sweet Alert
+                SweetAlert("Opsss...", $"Ha ocurrido un Error: {ex.Message}", NotificationType.error);
+                return RedirectToAction("Index");
+            }
+        }
+
+        //GET: ConfirmarEliminar
+        public ActionResult Confirmar_Eliminar(int id)
+        {
+            SweetAlert_Eliminar(id);
+            return RedirectToAction("Index");
+        }
+
         #region Auxiliares
         private class Opciones
         {
@@ -327,6 +372,43 @@ namespace Transportes_MVC_gen_12.Controllers
         }
         #endregion
 
+        #region Sweet Alert
+        private void SweetAlert(string title, string msg, NotificationType type)
+        {
+            var script = "<script languaje='javascript'> " +
+                         "Swal.fire({" +
+                         "title: '" + title + "'," +
+                         "text: '" + msg + "'," +
+                         "icon: '" + type + "'" +
+                         "});" +
+                         "</script>";
 
+            //TempData funciona como un viewBag, pasando información del controlador a cualquier parte de mi proyecto, siendo este más observable y con un tiempo de vida similar
+            TempData["sweetalert"] = script;
+        }
+
+        private void SweetAlert_Eliminar(int id)
+        {
+            var script = "<script languaje='javascript'>" +
+                "Swal.fire({" +
+                "title: '¿Estás Seguro?'," +
+                "text: 'Estás apunto de Eliminar el Camión: " + id.ToString() + "'," +
+                "icon: 'info'," +
+                "showDenyButton: true," +
+                "showCancelButton: true," +
+                "confirmButtonText: 'Eliminar'," +
+                "denyButtonText: 'Cancelar'" +
+                "}).then((result) => {" +
+                "if (result.isConfirmed) {  " +
+                "window.location.href = '/Camiones/Eliminar_Camion/" + id + "';" +
+                "} else if (result.isDenied) {  " +
+                "Swal.fire('Se ha cancelado la operación','','info');" +
+                "}" +
+                "});" +
+                "</script>";
+
+            TempData["sweetalert"] = script;
+        }
+        #endregion
     }
 }
