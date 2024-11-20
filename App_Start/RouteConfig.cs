@@ -16,7 +16,7 @@ namespace Transportes_MVC_gen_12
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Camiones", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

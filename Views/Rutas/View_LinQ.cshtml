@@ -1,0 +1,74 @@
+﻿@model IEnumerable<DTO.View_Rutas_DTO>
+
+<h2>@ViewBag.Titulo</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.C_)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cargamento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Origen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado_Origen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Destino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado_Destino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Chofer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Camión)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LLegada_Estimada)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.C_)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cargamento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Origen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado_Origen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destino)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado_Destino)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Chofer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Camión)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LLegada_Estimada)
+            </td>
+        </tr>
+    }
+</table>

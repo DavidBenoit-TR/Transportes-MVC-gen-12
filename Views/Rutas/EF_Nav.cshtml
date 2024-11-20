@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Transportes_MVC_gen_12.Models.Rutas>
+
+<h2>@ViewBag.Titulo</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha_salida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha_llegadareal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha_llegadaestimada)
+        </th>
+        <th>
+            @*Ya estoy navengando mediante los elementos virtuales previamente cargados en el controller*@
+            @Html.DisplayNameFor(model => model.Camiones.Matricula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Choferes.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Direcciones.Calle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Direcciones1.Calle)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha_salida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha_llegadareal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha_llegadaestimada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Camiones.Matricula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Choferes.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direcciones.Calle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direcciones1.Calle)
+            </td>
+        </tr>
+    }
+</table>
