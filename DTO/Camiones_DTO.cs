@@ -9,6 +9,7 @@ namespace DTO
 {
     public class Camiones_DTO
     {
+
         //DTO => Data Transfer Object
         //Decoradores de código
         //sirven para dar caracterizticas y definiciones específicas a cada campos y/o elemento de una clase
